@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -16,11 +17,14 @@ const indexRoutes = require('./routes/index');
 const campgroundRoutes = require('./routes/campgrounds');
 const commentRoutes = require('./routes/comments');
 
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost:27017/yelp_camp',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  }
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, '/public')));
