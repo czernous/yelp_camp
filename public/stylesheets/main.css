@@ -1,0 +1,93 @@
+/* INDEX CONTENT */
+.index-card {
+  min-height: 280px;
+  margin-bottom: 1em;
+}
+.index-card-body {
+  padding: 0;
+  height: 100%;
+  -webkit-box-shadow: 1px -1px 15px -4px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px -1px 15px -4px rgba(0, 0, 0, 0.2);
+  transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1) all;
+}
+.index-card-body:hover {
+  transform: scale(1.05);
+}
+.index-img {
+  height: 58%;
+}
+.index-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.index-card-name {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+/* B4 CLASSES */
+.jumbotron {
+  padding: 2rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+.form-control {
+  margin-bottom: 1rem;
+}
+.carousel-inner {
+  position: relative;
+  display: flex;
+}
+/* ------ */
+.page-wrapper {
+  min-height: 100vh;
+  position: relative;
+}
+.nav-link .user-name {
+  font-weight: 500;
+}
+.carousel-image {
+  object-fit: cover;
+}
+.carousel-overlay {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+.inner-overlay {
+  width: auto;
+  height: 40%;
+  padding: 10%;
+  margin: 5% auto;
+  color: #f3f3f3;
+}
+.inner-overlay h1 {
+  font-weight: 700;
+}
+.inner-overlay p {
+  font-weight: 500;
+}
+footer {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  bottom: 0;
+}
+
+@media (max-width: 576px) {
+  .index-card {
+    min-height: 400px;
+  }
+  .index-img {
+    height: 70%;
+  }
+  .inner-overlay {
+    margin: 25% auto;
+  }
+}

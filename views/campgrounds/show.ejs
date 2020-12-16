@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+    <%- include('../partials/header') %>
+    <div class="container mt-2 pb-5">
+        <div class="row">
+        <div class="col-md-3 mb-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">item 1</li>
+                <li class="list-group-item">item 2</li>
+                <li class="list-group-item">item 1</li>
+            </div>
+        </div>
+        <div class="col-md-8">         
+            <div class="card">
+                <img class="card-img-top" src="<%= campgrounds.img %>" alt="<%= campgrounds.name %> image">
+                <div class="card-body">
+                    <h4 class="float-end">$<%= campgrounds.price %>/night</h4>
+                    <h4><a href="#"><%= campgrounds.name %></a></h4>
+                    <p><%- campgrounds.desc %></p>
+                    <p><em>Submitted by <%= campgrounds.author.username %></em></p>
+                    <% if (currentUser && (campgrounds.author.id.equals(currentUser._id) || currentUser.isAdmin)) {%>
+                        <a href="/campgrounds/<%= campgrounds._id %>/edit" class="btn btn-warning">Edit</a>
+                        <form class="d-inline" action="/campgrounds/<%= campgrounds._id %>?_method=DELETE" method="POST">
+                            <button class="ms-1 btn btn-danger">Delete</button>
+                        </form>
+                    <% }; %>
+                </div>
+            </div>
+            <div class ="mt-5 card card-body bg-light">
+                <div class="text-end">
+                    <a href="/campgrounds/<%= campgrounds._id %>/comments/new" class="btn btn-success">Leave a comment</a>
+                </div>
+                <hr>
+                    <% campgrounds.comments.forEach(comment => { %>
+                     <div class="row mt-2">
+                        <div class="col-md-12">
+                            <strong><%= comment.author.username %></strong>
+                            <span class="float-end">10 days ago</span>
+                            <p><%= comment.text %></p>
+                            <% if (currentUser && (comment.author.id.equals(currentUser._id) || currentUser.isAdmin)) {%>
+                                <a 
+                                href="/campgrounds/<%= campgrounds._id %>/comments/<%= comment._id%>/edit" 
+                                class="btn btn-warning btn-sm"
+                                >
+                                Edit
+                                </a>
+                                <form class="d-inline" action="/campgrounds/<%= campgrounds._id %>/comments/<%= comment._id%>?_method=DELETE" method="POST">
+                                    <button class="ms-1 btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            <% }; %>
+                        </div>  
+                     </div>                  
+                    <%  }); %>
+            </div>
+        </div>
+    </div>
+    </div>
+    <%- include('../partials/footer') %>
+</div>
+<script>
+// CONVERT UNICODE TO HTML
+let descContent = document.querySelector('#content-wrapper').innerHTML;
+const replaceTags  = () => {
+    // regex for opening and closing tags
+const leftTag = /&lt;/gi;
+const rightTag = /&gt;/gi;
+// find and replace tags
+descContent = descContent.replace(leftTag, `<`);
+descContent = descContent.replace(rightTag, `>`);
+// parse altered html into content div
+document.querySelector('#content-wrapper').innerHTML = descContent;
+}
+replaceTags();
+</script>
